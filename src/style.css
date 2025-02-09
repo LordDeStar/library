@@ -1,0 +1,9 @@
+.card {
+    position: absolute;
+    top: 33%;
+    left: 33%
+}
+
+.card-body>.btn {
+    width: 100%;
+}
