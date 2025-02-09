@@ -25,7 +25,8 @@ export const Auth = ({ changeUser }) => {
 
     }
     return (
-        <div className="card" align="center" style={{ width: "30%" }}>
+        <div className="body">
+            <div className="card" align="center" style={{ width: "max-content" }}>
             <div className="card-header">
                 <h2>Сайт Уфимской библиотеки</h2>
             </div>
@@ -38,6 +39,7 @@ export const Auth = ({ changeUser }) => {
                 <br />
                 <button className="btn btn-primary" onClick={async () => { await handleClick() }}>Войти</button>
             </div>
+        </div>
         </div>
     );
 }

@@ -1,9 +1,43 @@
-.card {
-    position: absolute;
-    top: 33%;
-    left: 33%
-}
-
 .card-body>.btn {
     width: 100%;
+}
+.body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav-link{
+    cursor: pointer;
+}
+.home-container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+.home-container > div{
+    display: flex;
+    flex-direction: column;
+    max-width: 30%;
+}
+.catalog-container{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+.book-nav{
+    display: flex;
+    gap: 10px;
+}
+.book-nav > .input-group{
+    max-width: 250px;
+}
+
+.genres{
+    max-width: 25%;
+}
+.book-list{
+    min-width: 60%;
 }

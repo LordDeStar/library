@@ -2,12 +2,14 @@
 import { useEffect, useState } from "react";
 import { Auth } from "./components/Auth"
 import { Header } from "./components/Header";
+import { Home } from "./components/Home";
+import { Catalog } from "./components/Catalog";
 
 export const App = () => {
   const [user, setUser] = useState(null);
   const [route, setRoute] = useState("home");
   const render = () => {
-    if (!user) {
+    if (!user && false) {
       return <Auth changeUser={setUser} />;
     } else {
       switch (route) {
@@ -15,7 +17,7 @@ export const App = () => {
           return (
             <>
               <Header changeRoute={setRoute} />
-              <h1>Home</h1>
+              <Home />
             </>
 
           );
@@ -23,7 +25,7 @@ export const App = () => {
           return (
             <>
               <Header changeRoute={setRoute} />
-              <h1>Catalog</h1>
+              <Catalog />
             </>
 
           );
