@@ -14,7 +14,6 @@ export const Auth = ({ changeUser }) => {
         });
         if (response.ok) {
             const userData = await response.json();
-            console.log(userData);
             changeUser(userData);
             return true;
         } else {
@@ -27,19 +26,19 @@ export const Auth = ({ changeUser }) => {
     return (
         <div className="body">
             <div className="card" align="center" style={{ width: "max-content" }}>
-            <div className="card-header">
-                <h2>Сайт Уфимской библиотеки</h2>
+                <div className="card-header">
+                    <h2>Сайт Уфимской библиотеки</h2>
+                </div>
+                <div className="card-body ">
+                    <h1 className="card-title">Авторизация</h1>
+                    <br />
+                    <input type="text" ref={login} className="form-control" placeholder="Номер читательского билета" />
+                    <br />
+                    <input type="text" ref={pass} className="form-control" placeholder="Пароль" />
+                    <br />
+                    <button className="btn btn-primary" onClick={async () => { await handleClick() }}>Войти</button>
+                </div>
             </div>
-            <div className="card-body ">
-                <h1 className="card-title">Авторизация</h1>
-                <br />
-                <input type="text" ref={login} className="form-control" placeholder="Номер читательского билета" />
-                <br />
-                <input type="text" ref={pass} className="form-control" placeholder="Пароль" />
-                <br />
-                <button className="btn btn-primary" onClick={async () => { await handleClick() }}>Войти</button>
-            </div>
-        </div>
         </div>
     );
 }

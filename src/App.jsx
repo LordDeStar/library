@@ -9,7 +9,7 @@ export const App = () => {
   const [user, setUser] = useState(null);
   const [route, setRoute] = useState("home");
   const render = () => {
-    if (!user && false) {
+    if (!user) {
       return <Auth changeUser={setUser} />;
     } else {
       switch (route) {
@@ -25,7 +25,7 @@ export const App = () => {
           return (
             <>
               <Header changeRoute={setRoute} />
-              <Catalog />
+              <Catalog user={user} />
             </>
 
           );

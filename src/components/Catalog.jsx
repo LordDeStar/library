@@ -1,72 +1,39 @@
 import { useEffect, useState } from "react";
+import { apiUrl } from "../config";
 
-export const Catalog = ()=>{
+export const Catalog = ({ user }) => {
 
     const [listBooks, setBooks] = useState([]);
-    useEffect(()=>{
-        setBooks([
-            {
-                title: "test",
-                author: "Testov Test Testovich",
-                image: "https://avatars.mds.yandex.net/get-mpic/4415357/2a0000018a6a404be70d5a198ae5e1bed9d7/orig"
+    const handleBron = async (book) => {
+        const data = {
+            readerId: user.readerId,
+            bookTitle: book.title,
+            action: "reserve"
+        }
+
+        const response = await fetch(apiUrl + "/Book/loan", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
             },
-            {
-                title: "test",
-                author: "Testov Test Testovich",
-                image: "https://avatars.mds.yandex.net/get-mpic/4415357/2a0000018a6a404be70d5a198ae5e1bed9d7/orig"
-            },
-            {
-                title: "test",
-                author: "Testov Test Testovich",
-                image: "https://avatars.mds.yandex.net/get-mpic/4415357/2a0000018a6a404be70d5a198ae5e1bed9d7/orig"
-            },
-            {
-                title: "test",
-                author: "Testov Test Testovich",
-                image: "https://avatars.mds.yandex.net/get-mpic/4415357/2a0000018a6a404be70d5a198ae5e1bed9d7/orig"
-            },
-            {
-                title: "test",
-                author: "Testov Test Testovich",
-                image: "https://avatars.mds.yandex.net/get-mpic/4415357/2a0000018a6a404be70d5a198ae5e1bed9d7/orig"
-            },
-            {
-                title: "test",
-                author: "Testov Test Testovich",
-                image: "https://avatars.mds.yandex.net/get-mpic/4415357/2a0000018a6a404be70d5a198ae5e1bed9d7/orig"
-            },
-            {
-                title: "test",
-                author: "Testov Test Testovich",
-                image: "https://avatars.mds.yandex.net/get-mpic/4415357/2a0000018a6a404be70d5a198ae5e1bed9d7/orig"
-            },
-            {
-                title: "test",
-                author: "Testov Test Testovich",
-                image: "https://avatars.mds.yandex.net/get-mpic/4415357/2a0000018a6a404be70d5a198ae5e1bed9d7/orig"
-            },
-            {
-                title: "test",
-                author: "Testov Test Testovich",
-                image: "https://avatars.mds.yandex.net/get-mpic/4415357/2a0000018a6a404be70d5a198ae5e1bed9d7/orig"
-            },
-            {
-                title: "test",
-                author: "Testov Test Testovich",
-                image: "https://avatars.mds.yandex.net/get-mpic/4415357/2a0000018a6a404be70d5a198ae5e1bed9d7/orig"
-            },
-            {
-                title: "test",
-                author: "Testov Test Testovich",
-                image: "https://avatars.mds.yandex.net/get-mpic/4415357/2a0000018a6a404be70d5a198ae5e1bed9d7/orig"
-            },
-            {
-                title: "test",
-                author: "Testov Test Testovich",
-                image: "https://avatars.mds.yandex.net/get-mpic/4415357/2a0000018a6a404be70d5a198ae5e1bed9d7/orig"
-            },
-        ])
-    }, [])
+            body: JSON.stringify(data)
+        });
+        const letter = await response.json();
+        alert(letter.message);
+    }
+    useEffect(() => {
+        const temp = async () => {
+            const response = await fetch(apiUrl + '/Book/all');
+            if (response.ok) {
+                const list = await response.json()
+                setBooks(list);
+            }
+            else {
+                alert(await response.statusText);
+            }
+        }
+        temp();
+    }, []);
     return (
         <div className="catalog-container">
             <div className="genres">
@@ -83,7 +50,7 @@ export const Catalog = ()=>{
                         <li class="list-group-item"><input className="form-check-input" type="radio" name="genre" /> Все книги</li>
                         <li class="list-group-item"><input className="form-check-input" type="radio" name="genre" /> Все книги</li>
                         <li class="list-group-item"><input className="form-check-input" type="radio" name="genre" /> Все книги</li>
-                        
+
 
                     </ul>
                 </div>
@@ -92,21 +59,21 @@ export const Catalog = ()=>{
                 <div className="book-nav">
                     <h3>Каталог</h3>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Введите ваш запрос" aria-describedby="button-addon2"/>
+                        <input type="text" class="form-control" placeholder="Введите ваш запрос" aria-describedby="button-addon2" />
                         <button class="btn btn-primary" type="button" id="button-addon2">Найти</button>
                     </div>
                 </div>
 
                 <div className="list">
-                    {listBooks.map(book=>{
+                    {listBooks.map((book, index) => {
                         return (
-                            <div className="card book">
-                                <img className="card-img-top" src={book.image} alt={book.image} />
+                            <div className="card book" key={index}>
+                                <img className="card-img-top" src={book.imageUrl} alt={book.imageUrl} />
                                 <div className="card-body">
                                     <h5 className="card-title">{book.title}</h5>
-                                    <p className="card-text">{book.author}</p>
+                                    <p className="card-text">{book.publisher}</p>
                                     <div className="buttons">
-                                        <button className="btn btn-primary">Бронировать</button>
+                                        <button className="btn btn-primary" onClick={() => handleBron(book)}>Бронировать</button>
                                         <button className="btn btn-primary">В избранное</button>
                                     </div>
                                 </div>
