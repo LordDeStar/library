@@ -39,5 +39,29 @@
     max-width: 25%;
 }
 .book-list{
-    min-width: 60%;
+    max-width: 66%;
+}
+
+.book{
+    width: 300px;
+}
+.buttons{
+    display: flex;
+    gap: 10px;
+}
+.card-img-top{
+    height: 300px;
+}
+.buttons > button{
+    height: 40px;
+
+    width: fit-content;
+    text-align: center
+}
+.list{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    height: 80vh;
 }
