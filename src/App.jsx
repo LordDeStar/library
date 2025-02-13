@@ -4,6 +4,7 @@ import { Auth } from "./components/Auth"
 import { Header } from "./components/Header";
 import { Home } from "./components/Home";
 import { Catalog } from "./components/Catalog";
+import { MyBooks } from "./components/MyBooks";
 
 export const App = () => {
   const [user, setUser] = useState(null);
@@ -33,7 +34,7 @@ export const App = () => {
           return (
             <>
               <Header changeRoute={setRoute} />
-              <h1>My books</h1>
+              <MyBooks user={user} />
             </>
 
           );
