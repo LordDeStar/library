@@ -8,11 +8,11 @@ export const Catalog = ({ user }) => {
     const [currentGenre, setCurrentGenre] = useState("all");
     const [searchQuery, setSearchQuery] = useState("");
 
-    const handleBron = async (book) => {
+    const handleClick = async (book, action) => {
         const data = {
             readerId: user.readerId,
             bookTitle: book.title,
-            action: "reserve"
+            action: action
         };
         const response = await fetch(apiUrl + "/Book/loan", {
             method: "POST",
@@ -142,8 +142,8 @@ export const Catalog = ({ user }) => {
                                 <h5 className="card-title">{book.title}</h5>
                                 <p className="card-text">{book.publisher}</p>
                                 <div className="buttons">
-                                    <button className="btn btn-primary" onClick={() => handleBron(book)}>Бронировать</button>
-                                    <button className="btn btn-primary">В избранное</button>
+                                    <button className="btn btn-primary" onClick={() => handleClick(book, "reserve")}>Бронировать</button>
+                                    <button className="btn btn-primary" onClick={() => handleClick(book, "like")}>В избранное</button>
                                 </div>
                             </div>
                         </div>

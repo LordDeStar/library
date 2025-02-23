@@ -5,6 +5,7 @@ import { Header } from "./components/Header";
 import { Home } from "./components/Home";
 import { Catalog } from "./components/Catalog";
 import { MyBooks } from "./components/MyBooks";
+import Favorite from "./components/Favorite";
 
 export const App = () => {
   const [user, setUser] = useState(null);
@@ -42,7 +43,7 @@ export const App = () => {
           return (
             <>
               <Header changeRoute={setRoute} />
-              <h1>Liked</h1>
+              <Favorite user={user} />
             </>
 
           );
