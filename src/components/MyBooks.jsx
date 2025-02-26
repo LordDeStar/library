@@ -1,18 +1,22 @@
 import { useState, useEffect } from "react";
 import { apiUrl } from "../config";
-export const MyBooks = ({ user }) => {
+export const MyBooks = ({ user, checkUser }) => {
     const [reservedBooks, setBooks] = useState([]);
+    const temp = async () => {
+        console.log(user)
+        const response = await fetch(apiUrl + '/Book/get/' + user.ticketNumber);
+        if (response.ok) {
+            const data = await response.json()
+            setBooks(data.reservedBooks);
+        }
+        else {
+            alert(await response.statusText);
+        }
+    }
     useEffect(() => {
-        const temp = async () => {
-            console.log(user)
-            const response = await fetch(apiUrl + '/Book/get/' + user.ticketNumber);
-            if (response.ok) {
-                const data = await response.json()
-                setBooks(data.reservedBooks);
-            }
-            else {
-                alert(await response.statusText);
-            }
+        if (!user) {
+            checkUser();
+            return;
         }
         temp();
     }, []);

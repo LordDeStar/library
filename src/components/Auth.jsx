@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { apiUrl } from "../config";
-export const Auth = ({ changeUser }) => {
+export const Auth = ({ changeUser, changeRoute, lastRoute }) => {
     const login = useRef(null);
     const pass = useRef(null);
     const handleClick = async () => {
@@ -15,6 +15,10 @@ export const Auth = ({ changeUser }) => {
         if (response.ok) {
             const userData = await response.json();
             changeUser(userData);
+            if (lastRoute) {
+                changeRoute(lastRoute);
+            }
+
             return true;
         } else {
             const data = await response.json();

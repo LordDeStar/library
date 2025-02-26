@@ -1,22 +1,26 @@
 import { useState, useEffect } from 'react';
 import { apiUrl } from '../config';
 import '../style.css';
-const Favorite = ({ user }) => {
+const Favorite = ({ user, checkUser }) => {
     const [favoriteBooks, setBooks] = useState([]);
-    useEffect(() => {
-        const temp = async () => {
-            console.log(user)
-            const response = await fetch(apiUrl + '/Book/get/' + user.ticketNumber);
-            if (response.ok) {
-                const data = await response.json()
-                setBooks(data.favoriteBooks);
-            }
-            else {
-                alert(await response.statusText);
-            }
+    const temp = async () => {
+        const response = await fetch(apiUrl + '/Book/get/' + user.ticketNumber);
+        if (response.ok) {
+            const data = await response.json()
+            setBooks(data.favoriteBooks);
         }
-        temp();
-    }, []);
+        else {
+            alert(await response.statusText);
+        }
+    }
+    useEffect(() => {
+        if (!user) {
+            checkUser();
+        }
+        else {
+            temp();
+        }
+    }, [user]);
     return (
         <div className="list">
             {

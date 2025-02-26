@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { apiUrl } from "../config";
 
-export const Catalog = ({ user }) => {
+export const Catalog = ({ user, checkUser }) => {
     const [listBooks, setBooks] = useState([]);
     const [currentBooks, setCurrentBooks] = useState([]);
     const [genres, setGenres] = useState([]);
@@ -9,6 +9,11 @@ export const Catalog = ({ user }) => {
     const [searchQuery, setSearchQuery] = useState("");
 
     const handleClick = async (book, action) => {
+        checkUser();
+        if (!user) {
+            checkUser();
+            return;
+        }
         const data = {
             readerId: user.readerId,
             bookTitle: book.title,
